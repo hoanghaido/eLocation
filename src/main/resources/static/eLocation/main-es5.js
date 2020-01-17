@@ -910,7 +910,7 @@
             var EmployeeService = /** @class */ (function () {
                 function EmployeeService(http) {
                     this.http = http;
-                    this.baseUrl = 'http://immense-island-84293.herokuapp.com/api/';
+                    this.baseUrl = '/api/';
                 }
                 EmployeeService.prototype.getEmployeesList = function () {
                     return this.http.get("" + this.baseUrl + 'employeesList');
