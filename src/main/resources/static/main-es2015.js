@@ -479,8 +479,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: '', redirectTo: '/list', pathMatch: 'full' },
-    { path: 'list', component: _employee_list_employee_list_component__WEBPACK_IMPORTED_MODULE_3__["EmployeeListComponent"] },
+    { path: '', component: _employee_list_employee_list_component__WEBPACK_IMPORTED_MODULE_3__["EmployeeListComponent"] }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
