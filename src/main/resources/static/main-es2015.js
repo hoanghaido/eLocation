@@ -899,7 +899,7 @@ __webpack_require__.r(__webpack_exports__);
 let EmployeeService = class EmployeeService {
     constructor(http) {
         this.http = http;
-        this.baseUrl = 'http://immense-island-84293.herokuapp.com/api/';
+        this.baseUrl = '/api/';
     }
     getEmployeesList() {
         return this.http.get(`${this.baseUrl}` + 'employeesList');
