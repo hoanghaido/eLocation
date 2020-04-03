@@ -3,8 +3,10 @@ package hai.eLocation.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity()
-@Table(name = "employee")
+@Table(name = "employees")
 public class Employee {
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,17 +16,15 @@ public class Employee {
 	    @NotBlank(message = "Name is mandatory")
 	    private String name;
 	 
-	 @Column(name = "location")
-	 	private String location;
+	 @JsonManagedReference
+	 @OneToOne(cascade = CascadeType.PERSIST)
+		@JoinTable(	name = "employee_workplace", 
+		joinColumns = @JoinColumn(name = "emp_id"), 
+		inverseJoinColumns = @JoinColumn(name = "wp_id"))
+	 private Workplace workplace;
 	 
-	 @Column(name = "floor")
-	 	private String floor;
-	 
-	 @Column(name = "xCoord")
-	 	private String xCoord;
-
-	 @Column(name = "yCoord")
-	 	private String yCoord;
+	 @Column(name = "flexWorkplace")
+	 private boolean flexWorkplace;
 
 	public Long getId() {
 		return id;
@@ -42,37 +42,33 @@ public class Employee {
 		this.name = name;
 	}
 
-	public String getLocation() {
-		return location;
+	public Workplace getWorkplace() {
+		return workplace;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-	public String getFloor() {
-		return floor;
-	}
-
-	public void setFloor(String floor) {
-		this.floor = floor;
+	public void setWorkplace(Workplace workplace) {
+		this.workplace = workplace;
+		if (workplace != null) {
+			workplace.setEmployee(this);
+			workplace.setOccupied(true);
+		}
 	}
 	
-	 
-	 public String getxCoord() {
-		return xCoord;
+	public void removeWorkplace() {
+		if (this.getWorkplace() != null) {
+			this.getWorkplace().setOccupied(false);
+			this.getWorkplace().setEmployee(null);
+			this.setWorkplace(null);
+		}
 	}
 
-	public void setxCoord(String xCoord) {
-		this.xCoord = xCoord;
+	public boolean isFlexWorkplace() {
+		return flexWorkplace;
 	}
 
-	public String getyCoord() {
-		return yCoord;
+	public void setFlexWorkplace(boolean flexWorkplace) {
+		this.flexWorkplace = flexWorkplace;
 	}
 
-	public void setyCoord(String yCoord) {
-		this.yCoord = yCoord;
-	}
 
 }
