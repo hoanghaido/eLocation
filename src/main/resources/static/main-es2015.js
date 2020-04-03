@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>Login</h2>\n\n<form *ngIf=\"!isLoggedIn\" [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\n<mat-dialog-content style=\"display:flex;flex-direction: column;\">\n    <mat-form-field appearance=\"outline\">\n      <mat-label>Username</mat-label>\n      <input matInput formControlName=\"username\" required> \n      <mat-error *ngIf=\"loginForm.get('username').invalid\">Username can not be blank</mat-error>\n    </mat-form-field>  \n    <br>\n    <mat-form-field appearance=\"outline\">\n      <mat-label>Password</mat-label>\n      <input matInput [type]=\"'password'\" formControlName=\"password\" required> \n      <mat-error *ngIf=\"loginForm.get('password').invalid\">Password can not be blank</mat-error>\n    </mat-form-field> \n    <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\" isLoginFailed\">\n        Login failed.\n    </div>\n</mat-dialog-content> \n<mat-dialog-actions>  \n    <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"loginForm.invalid\">Login</button>  \n</mat-dialog-actions>  \n    \n</form>\n\n<div  *ngIf=\"isLoggedIn\">\n  <mat-dialog-content>\n    <h5>Logged in as {{ username }}.</h5>\n  </mat-dialog-content>\n  <mat-dialog-actions>  \n    <button mat-raised-button color=\"primary\" (click)=\"reloadPage()\">To Employees List</button>\n  </mat-dialog-actions>  \n</div>\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title>Login</h2>\n\n<form *ngIf=\"!isLoggedIn\" [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\n<mat-dialog-content style=\"display:flex;flex-direction: column;\">\n    <mat-form-field appearance=\"outline\">\n      <mat-label>Username</mat-label>\n      <input matInput formControlName=\"username\" required> \n      <mat-error *ngIf=\"loginForm.get('username').invalid\">Username can not be blank</mat-error>\n    </mat-form-field>  \n    <br>\n    <mat-form-field appearance=\"outline\">\n      <mat-label>Password</mat-label>\n      <input matInput [type]=\"'password'\" formControlName=\"password\" required> \n      <mat-error *ngIf=\"loginForm.get('password').invalid\">Password can not be blank</mat-error>\n    </mat-form-field> \n    <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\" isLoginFailed\">\n        Login failed.\n    </div>\n</mat-dialog-content> \n<mat-dialog-actions>  \n    <button type=\"submit\" mat-raised-button color=\"primary\" [disabled]=\"loginForm.invalid\">Login</button>  \n</mat-dialog-actions>  \n    \n</form>\n\n<div  *ngIf=\"isLoggedIn\">\n  <mat-dialog-content>\n    <h5>Logged in as {{ username }}.</h5>\n  </mat-dialog-content>\n  <mat-dialog-actions>  \n    <button mat-raised-button color=\"primary\" (click)=\"close()\">Close</button>\n    <!--<button mat-raised-button color=\"primary\" (click)=\"reloadPage()\">To Employees List</button>-->\n  </mat-dialog-actions>  \n</div>\n\n");
 
 /***/ }),
 
@@ -996,7 +996,13 @@ let LoginModalComponent = class LoginModalComponent {
         });
     }
     reloadPage() {
-        window.location.replace('/list');
+        this.router.navigate(['/list']);
+        setTimeout(() => {
+            this.close();
+        }, 2000);
+    }
+    close() {
+        this.dialogRef.close();
     }
 };
 LoginModalComponent.ctorParameters = () => [
@@ -1381,6 +1387,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _authentication_token_storage_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../authentication/token-storage.service */ "./src/app/authentication/token-storage.service.ts");
 /* harmony import */ var _authentication_profile_profile_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../authentication/profile/profile.component */ "./src/app/authentication/profile/profile.component.ts");
 /* harmony import */ var _authentication_auth_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../authentication/auth.service */ "./src/app/authentication/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
@@ -1397,12 +1405,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let EmployeeListComponent = class EmployeeListComponent {
-    constructor(employeeService, snackBar, dialog, tokenStorageService, authService) {
+    constructor(employeeService, snackBar, dialog, tokenStorageService, authService, router) {
         this.employeeService = employeeService;
         this.snackBar = snackBar;
         this.dialog = dialog;
         this.tokenStorageService = tokenStorageService;
         this.authService = authService;
+        this.router = router;
         this.selection = new _angular_cdk_collections__WEBPACK_IMPORTED_MODULE_4__["SelectionModel"](true, []);
         this.selecting = false;
         this.isMod = false;
@@ -1536,6 +1545,7 @@ let EmployeeListComponent = class EmployeeListComponent {
     }
     logout() {
         this.tokenStorageService.signOut();
+        this.router.navigate['/login'];
         window.location.reload();
     }
 };
@@ -1544,7 +1554,8 @@ EmployeeListComponent.ctorParameters = () => [
     { type: _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"] },
     { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] },
     { type: _authentication_token_storage_service__WEBPACK_IMPORTED_MODULE_12__["TokenStorageService"] },
-    { type: _authentication_auth_service__WEBPACK_IMPORTED_MODULE_14__["AuthService"] }
+    { type: _authentication_auth_service__WEBPACK_IMPORTED_MODULE_14__["AuthService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_15__["Router"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_angular_material_sort__WEBPACK_IMPORTED_MODULE_3__["MatSort"], { static: true })
