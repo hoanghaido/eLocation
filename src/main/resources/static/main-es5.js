@@ -871,7 +871,7 @@
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
             /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-            var AUTH_API = 'http://localhost:8080/api/auth/';
+            var AUTH_API = '/api/auth/';
             var httpOptions = {
                 headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' })
             };
@@ -1531,7 +1531,7 @@
             var EmployeeService = /** @class */ (function () {
                 function EmployeeService(http) {
                     this.http = http;
-                    this.baseUrl = 'http://localhost:8080/api/emp/';
+                    this.baseUrl = '/api/emp/';
                 }
                 EmployeeService.prototype.getEmployeesList = function () {
                     return this.http.get("" + this.baseUrl + 'employeesList');
@@ -1827,7 +1827,7 @@
             var WorkplaceService = /** @class */ (function () {
                 function WorkplaceService(http) {
                     this.http = http;
-                    this.baseUrl = 'http://localhost:8080/api/workplace/';
+                    this.baseUrl = '/api/workplace/';
                 }
                 WorkplaceService.prototype.getWorkplacesList = function () {
                     return this.http.get("" + this.baseUrl + 'list');

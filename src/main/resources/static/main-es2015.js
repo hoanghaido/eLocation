@@ -882,7 +882,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const AUTH_API = 'http://localhost:8080/api/auth/';
+const AUTH_API = '/api/auth/';
 const httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' })
 };
@@ -1609,7 +1609,7 @@ __webpack_require__.r(__webpack_exports__);
 let EmployeeService = class EmployeeService {
     constructor(http) {
         this.http = http;
-        this.baseUrl = 'http://localhost:8080/api/emp/';
+        this.baseUrl = '/api/emp/';
     }
     getEmployeesList() {
         return this.http.get(`${this.baseUrl}` + 'employeesList');
@@ -1919,7 +1919,7 @@ __webpack_require__.r(__webpack_exports__);
 let WorkplaceService = class WorkplaceService {
     constructor(http) {
         this.http = http;
-        this.baseUrl = 'http://localhost:8080/api/workplace/';
+        this.baseUrl = '/api/workplace/';
     }
     getWorkplacesList() {
         return this.http.get(`${this.baseUrl}` + 'list');
